@@ -21,12 +21,13 @@ RUN pip install --no-cache-dir \
     runpod>=1.6 \
     requests>=2.31
 
-# Install whisperx from git (separate step — needs PyPI index for its deps)
-RUN pip install --no-cache-dir \
-    git+https://github.com/m-bain/whisperx.git
+# Install whisperx — clone first, then install from local path
+RUN git clone https://github.com/m-bain/whisperx.git /tmp/whisperx && \
+    pip install --no-cache-dir /tmp/whisperx && \
+    rm -rf /tmp/whisperx
 
-# Verify whisperx installed correctly
-RUN python3 -c "import whisperx; print('whisperx OK')"
+# Verify critical imports
+RUN python3 -c "import whisperx; import pyannote.audio; print('All imports OK')"
 
 COPY handler.py /app/handler.py
 
