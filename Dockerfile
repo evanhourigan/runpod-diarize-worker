@@ -15,15 +15,18 @@ RUN pip install --no-cache-dir \
     torch torchaudio \
     --index-url https://download.pytorch.org/whl/cu121
 
-# Install remaining deps from PyPI (separate step so --index-url doesn't interfere)
+# Install pyannote and runpod from PyPI
 RUN pip install --no-cache-dir \
     pyannote.audio>=3.1 \
     runpod>=1.6 \
     requests>=2.31
 
-# Install whisperx last (it has its own deps that need PyPI access)
+# Install whisperx from git (separate step — needs PyPI index for its deps)
 RUN pip install --no-cache-dir \
     git+https://github.com/m-bain/whisperx.git
+
+# Verify whisperx installed correctly
+RUN python3 -c "import whisperx; print('whisperx OK')"
 
 COPY handler.py /app/handler.py
 
