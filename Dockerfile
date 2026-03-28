@@ -21,8 +21,9 @@ RUN pip install --no-cache-dir \
     runpod>=1.6 \
     requests>=2.31
 
-# Install whisperx — clone first, then install from local path
-RUN git clone https://github.com/m-bain/whisperx.git /tmp/whisperx && \
+# Install wheel/setuptools (needed for whisperx build) then whisperx
+RUN pip install --no-cache-dir wheel setuptools && \
+    git clone https://github.com/m-bain/whisperx.git /tmp/whisperx && \
     pip install --no-cache-dir /tmp/whisperx && \
     rm -rf /tmp/whisperx
 
