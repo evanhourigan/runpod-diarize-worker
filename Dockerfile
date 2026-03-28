@@ -21,8 +21,8 @@ RUN pip install --no-cache-dir \
     runpod>=1.6 \
     requests>=2.31
 
-# Install wheel/setuptools (needed for whisperx build) then whisperx
-RUN pip install --no-cache-dir wheel setuptools && \
+# Upgrade pip/setuptools (system version too old to parse whisperx metadata), then install whisperx
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     git clone https://github.com/m-bain/whisperx.git /tmp/whisperx && \
     pip install --no-cache-dir /tmp/whisperx && \
     rm -rf /tmp/whisperx
