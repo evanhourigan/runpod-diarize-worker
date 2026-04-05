@@ -27,8 +27,8 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip install --no-cache-dir /tmp/whisperx && \
     rm -rf /tmp/whisperx
 
-# Verify critical imports
-RUN python3 -c "import whisperx; import pyannote.audio; print('All imports OK')"
+# Verify critical imports work
+RUN python3 -c "import whisperx; import pyannote.audio; import runpod; print('All imports OK')"
 
 COPY handler.py /app/handler.py
 
