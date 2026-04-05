@@ -61,7 +61,7 @@ logger.info("Using device: %s", DEVICE)
 
 # Pre-load diarization model at startup (stays warm between jobs)
 logger.info("Loading diarization model...")
-DIARIZE_MODEL = DiarizationPipeline(use_auth_token=HF_TOKEN, device=DEVICE)
+DIARIZE_MODEL = DiarizationPipeline(token=HF_TOKEN, device=DEVICE)
 logger.info("Diarization model loaded")
 
 
